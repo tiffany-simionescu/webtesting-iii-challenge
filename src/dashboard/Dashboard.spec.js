@@ -1,26 +1,22 @@
 // Test away
-
 import React from 'react';
-import * as rtl from '@testing-library/react';
+import { render } from '@testing-library/react';
 import Dashboard from './Dashboard';
 
-// Dashboard MVP
+// Dashboard Renders Properly
 test('Dashboard renders without crashing', () => {
-  rtl.render(<Dashboard />);
+  render(<Dashboard />);
 });
 
-// Dashboard MVP
+// Dashboard - shows the controls and display
 test('<Dashboard /> snapshot', () => {
-  const wrapper = rtl.render(<Dashboard />);
+  const wrapper = render(<Dashboard />);
   expect(wrapper.asFragment()).toMatchSnapshot();
 });
 
-// Gate MVP
+// Gate - defaults to `unlocked` and `open`
 test('Gate defaults to unlocked and open', () => {
-
-});
-
-// Gate MVP
-test('Gate cannot be closed or opened if it is locked', () => {
-
+  const { getByText } = render(<Dashboard />);
+  getByText(/unlocked/i);
+  getByText(/open/i);
 });
